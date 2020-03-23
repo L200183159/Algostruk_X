@@ -1,58 +1,29 @@
-class Node():
-    def __init__(self, data, next = None):
-        self.data = data
-        self.next = next
+class MhsTIF:
+    def __init__(self, nama, nim, kota, uang):
+        self.nama = nama
+        self.nim = nim
+        self.kota = kota
+        self.uang = uang
 
-class LinkedList():
-    def __init__(self, head = None, tail = None):
-        self.head = head
-        self.tail = tail
-    def listPrint(self):
-        isi = self.head
-        tempat = []
-        while isi is not None:
-            tempat.append(isi.data)
-            isi = isi.next
-        print(tempat)
-    def tampilkan(self):
-        printval = self.head
-        while printval is not None:
-            print(printval.data)
-            printval = printval.next
-    def tambahDepan(self, a):
-        a.next = self.head
-        self.head = a
-    def tambahAkhir(self, b):
-        self.tail.next = b
-        self.tail = b
-            
-a = Node(10)
-b = Node(20)
-c = Node(30)
-d = Node(40)
-e = Node(50)
+c0 = MhsTIF("Ika", 10, "Sukoharjo", 240000)
+c1 = MhsTIF("Budi", 51, "Sragen", 230000)
+c2 = MhsTIF("Ahmad", 2, "Surakarta", 250000)
+c3 = MhsTIF("Chandra", 18, "Surakarta", 235000)
+c4 = MhsTIF("Eka", 4, "Boyolali", 240000)
+c5 = MhsTIF("Fandi", 31, "Salatiga", 250000)
+c6 = MhsTIF("Deni", 13, "Klaten", 245000)
+c7 = MhsTIF("Galuh", 5, "Wonogiri", 245000)
+c8 = MhsTIF("Janto", 23, "Klaten", 245000)
+c9 = MhsTIF("Hasan", 64, "Karanganyar", 270000)
+c10 = MhsTIF("Khalid", 29, "Purwodadi", 265000)
 
-a.next = b
-b.next = c
-c.next = d
-d.next = e
+Daftar = [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
 
-linked = LinkedList()
-linked.head = a
-linked.tail = e
-
-#Nomer1
-print("Hasil nomor 1")
-linked.tampilkan()
-
-#Nomer2
-print("Hasil nomor 2")
-x = Node(60)
-linked.tambahDepan(x)
-linked.listPrint()
-
-#Nomer3
-print("Hasil nomor 3")
-y = Node(70)
-linked.tambahAkhir(y)
-linked.listPrint()
+a = 250000
+b = []
+for i in Daftar:
+    if i.uang < a:
+        b.append(i.nama)
+    else:
+        continue
+print(b)
