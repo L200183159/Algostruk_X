@@ -1,32 +1,58 @@
-class Mahasiswa():
-    def __init__(self, nama, NIM, kota, us):
-        self.nama = nama
-        self.NIM = NIM
-        self.kotaTinggal = kota
-        self.uangSaku = us
-        self.daftar = []
-    def __str__(self):
-        s = self.nama+ ", NIM " + str(self.NIM) \
-            + ". Tinggal di " + self.kotaTinggal \
-            + ". Uangsaku Rp " + str(self.uangSaku) \
-            + " tiap bulannya."
-        return s
-    def ambilNama(self):
-        return self.nama
-    def ambilNIM(self):
-        return self.NIM
-    def ambilUangSaku(self):
-        return self.uangSaku
-    def makan(self, s):
-        print("Saya baru saja makan", s, "sambil belajar.")
-        self.keadaan = "kenyang"
-    def ambilKotaTinggal(self):
-        return self.kotaTinggal
-    def perbaruiKotaTinggal(self, kotaBaru):
-        self.kotaTinggal = kotaBaru
-    def tambahUangSaku(self, tambahUang):
-        self.uangSaku += tambahUang
-    def listKuliah(self):
-        return self.daftar
-    def ambilKuliah(self, mataKuliah):
-        self.daftar.append(mataKuliah)
+class Node():
+    def __init__(self, data, next = None):
+        self.data = data
+        self.next = next
+
+class LinkedList():
+    def __init__(self, head = None, tail = None):
+        self.head = head
+        self.tail = tail
+    def listPrint(self):
+        isi = self.head
+        tempat = []
+        while isi is not None:
+            tempat.append(isi.data)
+            isi = isi.next
+        print(tempat)
+    def tampilkan(self):
+        printval = self.head
+        while printval is not None:
+            print(printval.data)
+            printval = printval.next
+    def tambahDepan(self, a):
+        a.next = self.head
+        self.head = a
+    def tambahAkhir(self, b):
+        self.tail.next = b
+        self.tail = b
+            
+a = Node(10)
+b = Node(20)
+c = Node(30)
+d = Node(40)
+e = Node(50)
+
+a.next = b
+b.next = c
+c.next = d
+d.next = e
+
+linked = LinkedList()
+linked.head = a
+linked.tail = e
+
+#Nomer1
+print("Hasil nomor 1")
+linked.tampilkan()
+
+#Nomer2
+print("Hasil nomor 2")
+x = Node(60)
+linked.tambahDepan(x)
+linked.listPrint()
+
+#Nomer3
+print("Hasil nomor 3")
+y = Node(70)
+linked.tambahAkhir(y)
+linked.listPrint()
