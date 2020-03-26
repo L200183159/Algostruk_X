@@ -1,16 +1,27 @@
-x = [1,3,5,7,9]
-y = [2,4,6,8,10]
-z = x + y
-
-v = 0
-for j in range(len(x)):
-    w = z[v]
-    for i in z[v:]:
-        if w > i:
-            w = i
-        else:
-            continue
-    z.remove(w)
-    z.insert(v, w)
-    v += 1
-print(z)
+class Mahasiswa():
+    def __init__(self, nama, NIM, kota, us):
+        self.nama = nama
+        self.NIM = NIM
+        self.kotaTinggal = kota
+        self.uangSaku = us
+    def __str__(self):
+        s = self.nama+ ", NIM " + str(self.NIM) \
+            + ". Tinggal di " + self.kotaTinggal \
+            + ". Uangsaku Rp " + str(self.uangSaku) \
+            + " tiap bulannya."
+        return s
+    def ambilNama(self):
+        return self.nama
+    def ambilNIM(self):
+        return self.NIM
+    def ambilUangSaku(self):
+        return self.uangSaku
+    def makan(self, s):
+        print("Saya baru saja makan", s, "sambil belajar.")
+        self.keadaan = "kenyang"
+    def ambilKotaTinggal(self):
+        return self.kotaTinggal
+    def perbaruiKotaTinggal(self, kotaBaru):
+        self.kotaTinggal = kotaBaru
+    def tambahUangSaku(self, tambahUang):
+        self.uangSaku += tambahUang
