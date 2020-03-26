@@ -18,13 +18,16 @@ c9 = MhsTIF("Hasan", 64, "Karanganyar", 270000)
 c10 = MhsTIF("Khalid", 29, "Purwodadi", 265000)
 
 Daftar = [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
-
-a = []
-b = 0
+y = 0
+for i in range(len(Daftar)-1):
+    x = Daftar[y]
+    for j in Daftar[y:]:
+        if x.nim > j.nim:
+            x = j
+        else:
+            continue
+    Daftar.remove(x)
+    Daftar.insert(y, x)
+    y += 1
 for i in Daftar:
-    if i.kota == "Klaten":
-        a.append(b)
-        b += 1
-    else:
-        b += 1
-print(a)
+    print(i.nim, end = " ")

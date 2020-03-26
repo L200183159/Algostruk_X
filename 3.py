@@ -1,32 +1,56 @@
-class MhsTIF:
-    def __init__(self, nama, nim, kota, uang):
-        self.nama = nama
-        self.nim = nim
-        self.kota = kota
-        self.uang = uang
+from time import time as detak
+from random import shuffle as kocok
 
-c0 = MhsTIF("Ika", 10, "Sukoharjo", 240000)
-c1 = MhsTIF("Budi", 51, "Sragen", 230000)
-c2 = MhsTIF("Ahmad", 2, "Surakarta", 250000)
-c3 = MhsTIF("Chandra", 18, "Surakarta", 235000)
-c4 = MhsTIF("Eka", 4, "Boyolali", 240000)
-c5 = MhsTIF("Fandi", 31, "Salatiga", 250000)
-c6 = MhsTIF("Deni", 13, "Klaten", 245000)
-c7 = MhsTIF("Galuh", 5, "Wonogiri", 245000)
-c8 = MhsTIF("Janto", 23, "Klaten", 245000)
-c9 = MhsTIF("Hasan", 64, "Karanganyar", 270000)
-c10 = MhsTIF("Khalid", 29, "Purwodadi", 265000)
+def swap(A, p, q):
+    tmp = A[p]
+    A[p] = A[q]
+    A[q] = tmp
 
-Daftar = [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
+def cariPosisiYangTerkecil(A, dariSini, sampaiSini):
+    posisiYangTerkecil = dariSini
+    for i in range(dariSini+1, sampaiSini):
+        if A[i] < A[posisiYangTerkecil]:
+            posisiYangTerkecil = i
+    return posisiYangTerkecil
 
-a = []
-b = c0.uang
-for i in Daftar:
-    if i.uang <= b:
-        b = i.uang
-    else:
-        continue
-for i in Daftar:
-    if i.uang == b:
-        a.append(i.nama)
-print(a, b)
+def bubbleSort(A):
+    n = len(A)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if A[j] > A[j+1]:
+                swap(A, j, j+1)
+
+def selectionSort(A):
+    n = len(A)
+    for i in range(n - 1):
+        indexKecil = cariPosisiYangTerkecil(A, i, n)
+        if indexKecil != i:
+            swap(A, i, indexKecil)
+
+def insertionSort(A):
+    n = len(A)
+    for i in range(1, n):
+        nilai = A[i]
+        pos = i
+        while pos > 0 and nilai < A[pos - 1]:
+            A[pos] = A[pos - 1]
+            pos = pos - 1
+        A[pos] = nilai
+
+k = list(range(1,6001))
+kocok(k)
+u_bub = k[:]
+u_sel = k[:]
+u_ins = k[:]
+
+aw=detak();bubbleSort(u_bub);ak=detak();print('bubble: %g detik' %(ak-aw));
+aw=detak();selectionSort(u_sel);ak=detak();print('selection: %g detik' %(ak-aw));
+aw=detak();insertionSort(u_ins);ak=detak();print('insertion: %g detik' %(ak-aw));
+
+#result:
+
+#bubble: 5.35004 detik
+#selection: 1.94248 detik
+#insertion: 2.26017 detik
+
+#so, the conclusion is the selection sort give more effisient time in sorting algorithm 
