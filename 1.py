@@ -4,6 +4,11 @@ class MhsTIF:
         self.nim = nim
         self.kota = kota
         self.uang = uang
+    def __str__ (self) :
+        s = self.nama + " " + str(self.nim) + " " + self.kota + " " + str(self.uang)
+        return s
+    def getNim(self) :
+        return self.nim
 
 c0 = MhsTIF("Ika", 10, "Sukoharjo", 240000)
 c1 = MhsTIF("Budi", 51, "Sragen", 230000)
@@ -18,16 +23,79 @@ c9 = MhsTIF("Hasan", 64, "Karanganyar", 270000)
 c10 = MhsTIF("Khalid", 29, "Purwodadi", 265000)
 
 Daftar = [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
-y = 0
-for i in range(len(Daftar)-1):
-    x = Daftar[y]
-    for j in Daftar[y:]:
-        if x.nim > j.nim:
-            x = j
-        else:
-            continue
-    Daftar.remove(x)
-    Daftar.insert(y, x)
-    y += 1
+
+def mergesort(A) :
+    if len (A) > 1 :
+        mid = len(A) // 2
+        separuhkiri = A[:mid]
+        separuhkanan = A[mid:]
+
+        mergesort(separuhkiri)
+        mergesort(separuhkanan)
+
+        i=0;j=0;k=0
+        while i < len (separuhkiri)and j < len (separuhkanan) :
+            if separuhkiri[i].nim < separuhkanan[j].nim :
+                A[k].nim = separuhkiri[i].nim
+                i = i+1
+            else :
+                A[k].nim = separuhkanan[j].nim
+                j = j+1
+            k = k+1
+
+        while i < len (separuhkiri) :
+            A[k].nim = separuhkiri[i].nim
+            i = i+1
+            k = k+1
+        while j < len (separuhkanan) :
+            A[k].nim = separuhkanan[j].nim
+            j = j+1
+            k = k+1
+
+        return A
+    
+def quicksort(A):
+    quicksortbantu (A,0, len(A) -1)
+    return A
+
+def quicksortbantu(A, awal, akhir):
+    if awal < akhir :
+        titikbelah = partisi(A, awal, akhir)
+        quicksortbantu(A, awal, titikbelah -1)
+        quicksortbantu(A, titikbelah +1, akhir)
+
+def partisi(A, awal, akhir):
+    nilaipivot = A[awal].getNim()
+
+    penandakiri = awal +1
+    penandakanan = akhir
+
+    selesai = False
+    while not selesai :
+        while penandakiri <= penandakanan and \
+              A[penandakiri].getNim() <= nilaipivot :
+            penandakiri +=1
+        while A[penandakanan].getNim() >= nilaipivot and \
+            penandakanan >= penandakiri :
+            penandakanan -=1
+        if penandakanan < penandakiri :
+            selesai = True
+        else :
+            temp = A[penandakiri]
+            A[penandakiri] = A[penandakanan]
+            A[penandakanan] = temp
+
+    temp = A[awal]
+    A[awal] = A[penandakanan]
+    A[penandakanan] = temp
+
+    return penandakanan
+
+      
+mergesort(Daftar)
 for i in Daftar:
-    print(i.nim, end = " ")
+    print(i)
+print(" ")
+quicksort(Daftar)
+for i in Daftar:
+    print(i)
